@@ -28,6 +28,7 @@ function MapExplorer({
   stateTestData,
   regionHighlighted,
   onMapHighlightChange,
+  isCountryLoaded,
 }) {
   const [selectedRegion, setSelectedRegion] = useState({});
   const [panelRegion, setPanelRegion] = useState(getRegionFromState(states[0]));
@@ -106,12 +107,8 @@ function MapExplorer({
   );
 
   useEffect(() => {
-    if (regionHighlighted === undefined) {
-      return;
-    } else if (regionHighlighted === null) {
-      setSelectedRegion(null);
-      return;
-    }
+    if (regionHighlighted === undefined || regionHighlighted === null) return;
+
     const isState = !('district' in regionHighlighted);
     if (isState) {
       const newMap = MAP_META['India'];
@@ -148,6 +145,7 @@ function MapExplorer({
             return districtData[b].confirmed - districtData[a].confirmed;
           })[0];
         setHoveredRegion(topDistrict, newMap);
+        setSelectedRegion(topDistrict);
       }
     },
     [setHoveredRegion, stateDistrictWiseData, states]
@@ -256,7 +254,7 @@ function MapExplorer({
                 : 'state-last-update'
             }`}
           >
-            <h6>Last Updated</h6>
+            <h6>Last updated</h6>
             <h3
               title={
                 isNaN(Date.parse(formatDate(lastupdatedtime)))
@@ -312,6 +310,7 @@ function MapExplorer({
         changeMap={switchMapToState}
         selectedRegion={selectedRegion}
         setSelectedRegion={setSelectedRegion}
+        isCountryLoaded={isCountryLoaded}
       />
     </div>
   );
