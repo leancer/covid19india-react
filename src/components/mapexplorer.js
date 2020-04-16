@@ -170,7 +170,7 @@ function MapExplorer({
       ref={forwardRef}
     >
       <div className="header">
-        <h1>{currentMap.name}</h1>
+        <h1>{currentMap.name} Map</h1>
         <h6>
           {window.innerWidth <= 769 ? 'Tap' : 'Hover'} over a{' '}
           {currentMap.mapType === MAP_TYPES.COUNTRY ? 'state/UT' : 'district'}{' '}
@@ -269,7 +269,7 @@ function MapExplorer({
                 : formatDistance(
                     new Date(formatDate(lastupdatedtime)),
                     new Date()
-                  ) + ' Ago'}
+                  ) + ' ago'}
             </h3>
           </div>
         )}
