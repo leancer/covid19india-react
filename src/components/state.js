@@ -191,13 +191,14 @@ function State(props) {
                   <div className="districts">
                     {districtData[stateName]
                       ? Object.keys(districtData[stateName].districtData)
-                          .slice(0, 6)
+                          .filter((d) => d !== 'Unknown')
                           .sort(
                             (a, b) =>
                               districtData[stateName].districtData[b]
                                 .confirmed -
                               districtData[stateName].districtData[a].confirmed
                           )
+                          .slice(0, 6)
                           .map((district, index) => {
                             return (
                               <div key={index} className="district">
